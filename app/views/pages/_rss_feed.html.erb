@@ -1,0 +1,13 @@
+<div class="newsfeeds span<%= index >= 6 ? '6' : '4' %>">
+	<h3 class="feed-title"><%= feed.name %></h3>
+	<ul class="article-list">
+		<% feed.articles.each_with_index do |article, index| %>
+			<li class="<%= index >= 7 ? "article-header hide" : "article-header" %>">
+				<%= link_to article.title, { controller: :pages, action: :story, article_id: article.id, feed_id: feed.id }, target: "_blank" %>
+			</li>
+		<% end %>
+		<% if feed.articles.size > 7 %>
+	    <strong><a class="more-less">more</a></strong>
+	 <% end %>
+	</ul>
+</div>

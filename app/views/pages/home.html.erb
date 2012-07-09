@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="span12">
+	      <h2>Featured Articles</h2>
+	      <div class="row">
+	        <div class="span6 newsfeeds">
+	          <h3>Most Popular</h3>
+	          <ul class="article-list">
+		          <% Article.top_stories(10).each do |article| %>
+			          <li class="article-header">
+				          <%= link_to article.title, { controller: :pages, action: :story, article_id: article.id, feed_id: article.feed.id }, target: "_blank" %>
+			          </li>
+		          <% end %>
+	          </ul>
+          </div>
+          <div class="span6 newsfeeds">
+            <h3>Newest</h3>
+	          <ul class="article-list">
+		          <% Article.top_stories(10).each do |article| %>
+			          <li class="article-header">
+				          <%= link_to article.title, { controller: :pages, action: :story, article_id: article.id, feed_id: article.feed.id }, target: "_blank" %>
+			          </li>
+		          <% end %>
+	          </ul>
+          </div>
+        </div>
+  </div>
+</div>
+<div class="row">
+  <div class="newsfeeds span12">
+    <h3>Air Jeff's photo feed</h3>
+    <ul id="scroller">
+      <% Photo.each do |photo| %>
+        <%= render "photo", photo: photo %>
+      <% end %>
+    </ul>  
+  </div>
+</div>
+<% @feeds.each_with_index do |feed, index| %>
+  <% if new_row?(index) %>
+    <div class="row">
+  <% end %>
+  <%= render "rss_feed", feed: feed, index: index %>
+  <% if finish_row?(index) %>
+    </div>
+  <% end %>
+<% end %>

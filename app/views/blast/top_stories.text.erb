@@ -1,0 +1,10 @@
+Here are a few of our top stories from today
+<% a1 = Article.newest_stories.sample %>
+<% a2 = Article.top_stories(10).sample %>
+<%= "#{a1.title} - #{a1.url}" %>
+<%= "#{a2.title} - #{a2.url}" %>
+
+<%= "See more at www.bigaviation.com" %>
+
+Click the link below to unsubscribe
+href="http://bigaviation.com/mailer/destroy?id=<%= @contact.id %>;key=<%= @contact.key %>

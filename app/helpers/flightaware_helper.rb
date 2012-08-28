@@ -1,0 +1,2 @@
+module FlightawareHelper
+end

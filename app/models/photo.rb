@@ -4,7 +4,8 @@ class Photo
   field :title, type: String
   field :external_url, type: String
   field :thumbnail_url, type: String
-  
+  field :flickr, type: Boolean  
+
   def self.get_photo_feed
     feed = false
     until feed.class == Feedzirra::Parser::RSS
@@ -25,6 +26,24 @@ class Photo
     end
     until Photo.all.size <= 21
       Photo.all.sample.destroy
+    end
+    self.update_flickr
+  end
+
+  def self.update_flickr
+    self.all.each do |p|
+      p.flickr ? p.destroy : false
+    end
+    self.flickr_input( "481553@N21" )
+    self.flickr_input( "92517064@N00" )
+  end
+
+  def self.flickr_input( group_id )
+    FlickRaw.api_key="0b5f55a64a8c18a5b8087aeb77573cd2"
+    FlickRaw.shared_secret="abd4529ea1ac3ddb"
+    group_feed = flickr.groups.pools.getPhotos( group_id: group_id )
+    group_feed.each do |p|
+      Photo.create( title: p.title, external_url: FlickRaw.url_photopage(p), thumbnail_url: FlickRaw.url_q(p), flickr: true )
     end
   end
 

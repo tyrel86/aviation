@@ -17,6 +17,14 @@ class Article
       articles += feed.articles.map { |article| article }
     end
   end
+
+  def self.newest_stories
+    newest = []
+    Feed.each do |f|
+      newest.push f.articles.last
+    end
+    newest
+  end
   
   def self.top_stories(x)
     #Get a list of all articles sorted by number of clicks hight to low

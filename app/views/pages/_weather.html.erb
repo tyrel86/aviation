@@ -1,0 +1,65 @@
+<% num = ((url == "one") ? 1 : 2 ) %>
+
+<iframe src="/snatcher?url=<%= url %>" id="inneriframe<%= num %>" scrolling=no></iframe>
+
+<% if url == "one" %>
+<script type="text/javascript">
+function take_it_over1() {
+    $("#inneriframe1").contents().find("link").not('[href^="http"]').each(function() { 
+      $(this).attr('href', "http://aviationweather.gov/" + $(this).attr('href') )
+    })
+}
+function fix_imgs1() {
+    $("#inneriframe1").contents().find("img").not('[src^="http"]').each(function() { 
+      $(this).attr('src', "http://aviationweather.gov/" + $(this).attr('src') )
+    })
+}
+function new_tab_all_links1() {
+    $("#inneriframe1").contents().find("a").each(function() { 
+      $(this).attr('target', "_blank" )
+    })
+}
+function new_tab_all_map_links1() {
+    $("#inneriframe1").contents().find("area").each(function() { 
+      $(this).attr('target', "_blank" )
+    })
+}
+$(window).bind("load", function() {
+   fix_imgs1();
+   take_it_over1();
+   new_tab_all_links1();
+   new_tab_all_map_links1();
+});
+</script>
+<% end %>
+
+<% if url == "two" %>
+<script type="text/javascript">
+function take_it_over() {
+    $("#inneriframe2").contents().find("link").not('[href^="http"]').each(function() { 
+      $(this).attr('href', "http://weather.unisys.com/images/sat_sfc_map_loop.php" + $(this).attr('href') )
+    })
+}
+function fix_imgs() {
+    $("#inneriframe2").contents().find("img").not('[src^="http"]').each(function() { 
+      $(this).attr('src', "http://weather.unisys.com/images/sat_sfc_map_loop.php" + $(this).attr('src') )
+    })
+}
+function new_tab_all_links() {
+    $("#inneriframe2").contents().find("a").each(function() { 
+      $(this).attr('target', "_blank" )
+    })
+}
+function new_tab_all_map_links() {
+    $("#inneriframe2").contents().find("area").each(function() { 
+      $(this).attr('target', "_blank" )
+    })
+}
+$(window).bind("load", function() {
+   fix_imgs2();
+   take_it_over2();
+   new_tab_all_links2();
+   new_tab_all_map_links2();
+});
+</script>
+<% end %>

@@ -1,0 +1,9 @@
+<div class="span6 newsfeeds">
+  <h3>Sign up for our daily news letter</h3>
+  <%= form_tag(:controller => "mailer", :action => "create", :method => "post", :class => "nifty_form") do %>
+    <%= label_tag "Email" %>
+    <%= text_field_tag :email %><br />
+
+    <%= submit_tag "Sign Up" %>
+  <% end %>
+</div>

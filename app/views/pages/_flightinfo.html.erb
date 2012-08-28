@@ -1,0 +1,6 @@
+<h3>Flight Info</h4>
+<%= form_tag({:controller => "flightaware", :action => "flightinfo"}, :method => "post", :class => "nifty_form") do %>
+  <%= label_tag "Requested tail number, or airline with flight number" %>
+  <%= text_field_tag :ident %><br />
+  <%= submit_tag "Submit" %>
+<% end %>

@@ -1,0 +1,24 @@
+<h3>Scots Picks Index</h3>
+<table>
+  <tr>
+    <th>Title</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @stories.each do |story| %>
+  <tr>
+    <td><%= story.title %></td>
+    <td class="btn"><%= link_to 'Edit', edit_story_path(story) %></td>
+    <td class="btn"><%= link_to 'Destroy', story, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Story', new_story_path, class: :btn %>
+<a class="btn" href="/stories">Manage Scotts Picks</a>
+<a class="btn" href="/videos">Manage Video of the Day</a>
+<a class="btn" href="/admin/index">Admin Home</a>
+<a class="btn" href="/">Back to site</a>

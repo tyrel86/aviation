@@ -1,0 +1,15 @@
+<h1>Hello Scott</h1>
+<p>Sorry but you must prove it is truly you</p>
+<% if notice %>
+        <div id="notice" class="alert alert-block alert-info fade in">
+          <button class="close" data-dismiss="alert">&times;</button>
+          <p><%= notice %></p>
+        </div>
+<% end %>
+<%= form_tag('/sessions/create') do %>
+  <p>User Name</p>
+  <%= text_field_tag 'user_name' %>
+  <p>Password</p>
+  <%= text_field_tag 'password' %>
+  <%= submit_tag 'Login' %>
+<% end %>

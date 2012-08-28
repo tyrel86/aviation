@@ -1,0 +1,21 @@
+<h3>Video of the Day</h3>
+
+<table>
+  <tr>
+    <th>Url</th>
+    <th></th>
+  </tr>
+
+<% @videos.each do |video| %>
+  <tr>
+    <td><%= video.url %></td>
+    <td class="btn"><%= link_to 'Edit', edit_video_path(video) %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+<a class="btn" href="/admin/index">Admin Home</a>
+<a class="btn" href="/stories">Manage Scotts Picks</a>
+<a class="btn" href="/videos">Manage Video of the Day</a>
+<a class="btn" href="/">Back to site</a>

@@ -1,9 +1,8 @@
 <div class="row">
   <div class="span12">
-	      <h2>Featured Articles</h2>
 	      <div class="row">
 	        <div class="span6 newsfeeds">
-	          <h3>Most Popular</h3>
+	          <h3>POPULAR TODAY</h3>
 	          <ul class="article-list">
 		          <% Article.top_stories(10).each do |article| %>
 			          <li class="article-header">
@@ -13,9 +12,9 @@
 	          </ul>
           </div>
           <div class="span6 newsfeeds">
-            <h3>Newest</h3>
+            <h3>MOST RECENT</h3>
 	          <ul class="article-list">
-		          <% Article.top_stories(10).each do |article| %>
+		          <% Article.newest_stories.each do |article| %>
 			          <li class="article-header">
 				          <%= link_to article.title, { controller: :pages, action: :story, article_id: article.id, feed_id: article.feed.id }, target: "_blank" %>
 			          </li>
@@ -25,9 +24,9 @@
         </div>
   </div>
 </div>
-<div class="row">
+<div class="row" id="photofeed">
   <div class="newsfeeds span12">
-    <h3>Air Jeff's photo feed</h3>
+    <h3>Photo Feed</h3>
     <ul id="scroller">
       <% Photo.each do |photo| %>
         <%= render "photo", photo: photo %>
@@ -35,12 +34,88 @@
     </ul>  
   </div>
 </div>
-<% @feeds.each_with_index do |feed, index| %>
-  <% if new_row?(index) %>
-    <div class="row">
-  <% end %>
-  <%= render "rss_feed", feed: feed, index: index %>
-  <% if finish_row?(index) %>
-    </div>
-  <% end %>
-<% end %>
+<div class="row">
+  <center><h3>COMMERCIAL AVIATION NEWS</h3></center>
+  <div class="span4 newsfeeds">
+    <%= render "rss_feed", feed: @feeds.where( name: 'Aviation Week Business' ).first %>
+  </div>
+  <div class="span4 newsfeeds">
+    <%= render "rss_feed", feed: @feeds.where( name: 'Aviation Week Commercial' ).first %>
+  </div>
+  <div class="span4 newsfeeds">
+    <%= render "rss_feed", feed: @feeds.where( name: 'Aero News Commercial' ).first %>
+  </div>
+</div>
+
+<div class="row">
+  <center><h3>GENERAL AVIATION NEWS</h3></center>
+  <div class="span6 newsfeeds">
+    <%= render "rss_feed", feed: @feeds.where( name: 'Aero News General' ).first %>
+  </div>
+  <div class="span6 newsfeeds">
+    <%= render "rss_feed", feed: @feeds.where( name: 'General Aviation News' ).first %>
+  </div>
+</div>
+<div class="row">
+<center><h3>Weather</h3></center>
+  <div class="span6 newsfeeds">
+    <a href="http://aviationweather.gov/" target="_blank">
+      <%= image_tag "http://aviationweather.gov/data/front/front_page_sat_2color.gif" %>
+    </a>
+  </div>
+  <div class="span6 newsfeeds">
+    <a href="http://www.baseops.net/metro.html" target="_blank">
+      <%= image_tag "http://weather.unisys.com/images/sat_sfc_map_loop.gif" %>
+    </a>
+  </div>
+</div>
+<div class="row">
+  <center><h3>Flight Information</h3></center>
+  <div class="span6 newsfeeds">
+    <%= render "airport" %>
+  </div>
+  <div class="span6 newsfeeds">
+    <%= render "flightaware" %>
+  </div>
+</div>
+<div class="row">
+  <center><h3>MILITARY AVIATION NEWS</h3></center>
+  <div class="span6 newsfeeds">
+    <%= render "rss_feed", feed: @feeds.where( name: 'Aero News Military' ).first %>
+  </div>
+  <div class="span6 newsfeeds">
+    <%= render "rss_feed", feed: @feeds.where( name: 'Aviation Week Military' ).first %>
+  </div>
+</div>
+<div class="row">
+  <div class="span6 newsfeeds">
+    <%= render "rss_feed", feed: @feeds.where( name: 'Air Attack' ).first %>
+  </div>
+  <div class="span6 newsfeeds">
+    <%= render "rss_feed", feed: @feeds.where( name: 'NYT Military' ).first %>
+  </div>
+</div>
+<div class="row">
+  <div class="span6 newsfeeds">
+    <h3>Incidents and Accidents</h3>
+    <%= render "rss_feed", feed: @feeds.where( name: 'Incidents and Accidents' ).first %>
+  </div>
+  <div class="span6 newsfeeds">
+    <h3>Video of the day</h3>
+      <div id="vidofday">
+        <iframe width="420" height="315" src="<%=@vod.url%>" frameborder="0" allowfullscreen></iframe>
+      </div>
+  </div>
+</div>
+<div class="row">
+  <div class="span12 newsfeeds" id="editorspicks">
+    <center>
+    <h3>Editors Suggestions</h3>
+    </center>
+    <%= render("story", stories: @scots_picks) if @scots_picks.class == Mongoid::Criteria %>
+  </div>
+</div>
+<div class="row">
+  <%= render "email" %>
+  <%= render "social-media" %>
+</div>

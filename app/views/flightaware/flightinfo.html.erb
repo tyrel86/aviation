@@ -1,0 +1,19 @@
+<a href="/">Go Home</a>
+<h3>Recent Flights</h3>
+<% @flights.each do |flight| %>
+<ul>
+<% f = true %>
+<% flight.each do |k,v| %>
+  <% if f %>
+    <strong>
+  <% end %>
+  <li><%= k.to_s.gsub('_',' ').capitalize %>: <%= v %></li>
+  <% if f %>
+    </strong>
+    <% f = false %>
+  <% end %>
+<% end %>
+</ul>
+<br />
+<% end %>
+<a href="/">Go Home</a>
